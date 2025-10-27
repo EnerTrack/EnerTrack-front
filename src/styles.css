@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+:root {
+               /* activar como tema por defecto */
+
+  --color-bg-primary: #1e293b;  /*color fondo*/
+
+  --p-blue: yellow
+
+  --color-base-300: oklch(25% 0.04 140);
+  --color-base-content: oklch(98% 0.01 140);
+
+  --color-primary: oklch(62.704% 0.22708 26.82);
+  --color-primary-content: oklch(98% 0.01 140);
+
+  --color-secondary: #111827;
+  --color-secondary-content: oklch(98% 0.01 160);
+
+  --color-accent: oklch(65% 0.22 120);
+  --color-accent-content: oklch(98% 0.01 120);
+
+  --color-neutral-content: oklch(98% 0.01 240);
+
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(98% 0.01 220);
+
+  --color-success: #a3e635;
+  --color-success-content: oklch(98% 0.01 140);
+
+  --color-warning: oklch(80% 0.25 80);
+  --color-warning-content: oklch(20% 0.05 80);
+
+  --color-error: oklch(65% 0.3 30);
+  --color-error-content: oklch(98% 0.01 30);
+
+  /* bordes y radios */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  --border: 1px;
+
+  /* efectos */
+  --depth: 1;
+  --noise: 0;
+}
