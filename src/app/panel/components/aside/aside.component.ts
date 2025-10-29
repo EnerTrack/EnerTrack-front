@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import {  Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { RouterLink,  } from "@angular/router";
+import { initFlowbite } from 'flowbite';
 
 
 interface SidebarItem {
@@ -15,8 +16,10 @@ interface SidebarItem {
   imports: [RouterLink, NgClass],
   templateUrl: './aside.component.html',
 })
-export class AsideComponent {
-
+export class AsideComponent implements OnInit {
+  ngOnInit() {
+    initFlowbite();
+  }
 
   items: SidebarItem[] = [
     {

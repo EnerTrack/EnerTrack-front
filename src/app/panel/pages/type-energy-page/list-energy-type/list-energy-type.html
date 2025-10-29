@@ -1,0 +1,170 @@
+<div class="p-6 bg-[#0f172a] rounded-xl text-white w-full">
+  <h2 class="text-lg font-semibold mb-4">Tipos de Energía</h2>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-700 rounded-lg overflow-hidden">
+      <thead class="bg-gray-800 text-gray-300 text-sm">
+        <tr>
+          <th class="px-4 py-2 text-left">Nombre</th>
+          <th class="px-4 py-2 text-left">Estado</th>
+          <th class="px-4 py-2 text-center">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody class="text-sm divide-y divide-gray-700">
+        @for (item of energyTypes; track item.id) {
+          <tr class="hover:bg-gray-800 transition">
+            <td class="px-4 py-2">{{ item.name }}</td>
+            <td class="px-4 py-2">{{ item.status }}</td>
+            <td class="px-4 py-2 text-center flex justify-center gap-4">
+              <!-- Botón Editar -->
+              <button
+                (click)="onEdit(item)"
+                class="text-blue-400 hover:text-blue-300 transition-transform transform hover:scale-110"
+                title="Editar"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-dasharray="20"
+                      stroke-dashoffset="20"
+                      d="M3 21h18"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        dur="0.2s"
+                        values="20;0"
+                      />
+                    </path>
+                    <path
+                      fill="currentColor"
+                      fill-opacity="0"
+                      stroke-dasharray="48"
+                      stroke-dashoffset="48"
+                      d="M7 17v-4l10 -10l4 4l-10 10h-4"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="fill-opacity"
+                        begin="1.1s"
+                        dur="0.15s"
+                        values="0;0.3"
+                      />
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.2s"
+                        dur="0.6s"
+                        values="48;0"
+                      />
+                    </path>
+                    <path
+                      stroke-dasharray="8"
+                      stroke-dashoffset="8"
+                      d="M14 6l4 4"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.8s"
+                        dur="0.2s"
+                        values="8;0"
+                      />
+                    </path>
+                  </g>
+                </svg>
+              </button>
+
+              <!-- Botón Eliminar -->
+              <button
+                
+                class="text-red-500 hover:text-red-400 transition-transform transform hover:scale-110"
+                title="Eliminar"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-dasharray="64"
+                      stroke-dashoffset="64"
+                      d="M13 3l6 6v12h-14v-18h8"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        dur="0.6s"
+                        values="64;0"
+                      />
+                    </path>
+                    <path
+                      stroke-dasharray="14"
+                      stroke-dashoffset="14"
+                      stroke-width="1"
+                      d="M12.5 3v5.5h6.5"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.7s"
+                        dur="0.2s"
+                        values="14;0"
+                      />
+                    </path>
+                    <path
+                      stroke-dasharray="10"
+                      stroke-dashoffset="10"
+                      d="M9 11l6 6"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="0.9s"
+                        dur="0.2s"
+                        values="10;0"
+                      />
+                    </path>
+                    <path
+                      stroke-dasharray="10"
+                      stroke-dashoffset="10"
+                      d="M15 11l-6 6"
+                    >
+                      <animate
+                        fill="freeze"
+                        attributeName="stroke-dashoffset"
+                        begin="1.1s"
+                        dur="0.2s"
+                        values="10;0"
+                      />
+                    </path>
+                  </g>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

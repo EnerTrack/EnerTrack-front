@@ -1,0 +1,166 @@
+<section
+  class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-6 w-full h-full"
+>
+  <form class="grid gap-6 sm:grid-cols-2 w-full max-w-4xl">
+    <!-- Nombre -->
+    <div>
+      <label
+        for="name"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Nombre</label
+      >
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Ingrese el nombre"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Apellido -->
+    <div>
+      <label
+        for="lastName"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Apellido</label
+      >
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Ingrese el apellido"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Correo electrónico -->
+    <div>
+      <label
+        for="email"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Correo Electrónico</label
+      >
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Ingrese el correo"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Teléfono -->
+    <div>
+      <label
+        for="phone"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Teléfono</label
+      >
+      <input
+        type="number"
+        id="phone"
+        name="phone"
+        placeholder="Ingrese el número de teléfono"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Documento -->
+    <div>
+      <label
+        for="document"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Número de Documento</label
+      >
+      <input
+        type="text"
+        id="document"
+        name="document"
+        placeholder="Ingrese el documento"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Tipo de Documento -->
+    <div>
+      <label
+        for="documentType"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Tipo de Documento</label
+      >
+      <select
+        id="documentType"
+        name="documentType"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+        <option value="" disabled selected>Seleccione tipo</option>
+        <option value="CC">Cédula de Ciudadanía</option>
+        <option value="CE">Cédula de Extranjería</option>
+        <option value="TI">Tarjeta de Identidad</option>
+        <option value="PP">Pasaporte</option>
+      </select>
+    </div>
+
+    <!-- Fecha de Nacimiento -->
+    <div>
+      <label
+        for="birthDate"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Fecha de Nacimiento</label
+      >
+      <input
+        type="date"
+        id="birthDate"
+        name="birthDate"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label
+        for="status"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Estatus</label
+      >
+      <select
+        id="status"
+        name="status"
+        required
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg
+               focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+        <option value="" disabled selected>Seleccione estatus</option>
+        <option value="ACTIVE">Activo</option>
+        <option value="INACTIVE">Inactivo</option>
+      </select>
+    </div>
+
+    <!-- Botón de Enviar -->
+    <div class="sm:col-span-2 flex justify-end mt-4">
+      <button
+        type="button"
+        class="text-white bg-green-600 hover:bg-green-700 focus:ring-4
+               focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5
+               text-center transition"
+      >
+        Registrar Persona
+      </button>
+    </div>
+  </form>
+</section>

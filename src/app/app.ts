@@ -1,7 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LayoutPageComponent } from "./public/pages/layout-page/layout-page.components";
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -9,7 +7,6 @@ import { LayoutPageComponent } from "./public/pages/layout-page/layout-page.comp
   styleUrl: './app.css'
 })
 export class App {
-
 
   protected readonly title = signal('EnerTrack');
 }
