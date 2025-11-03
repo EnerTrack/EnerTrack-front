@@ -1,7 +1,7 @@
 <section
   class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-5 w-full h-full"
 >
-  <form class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl">
+  <form [formGroup]="formDocumentType" (ngSubmit)="onSave()" class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl">
     <!-- Nombre del tipo de documento -->
     <div class="sm:col-span-2">
       <label
@@ -11,8 +11,7 @@
       >
       <input
         type="text"
-        id="documentName"
-        name="documentName"
+        formControlName="name"
         placeholder="Ej: Cédula, Pasaporte, NIT..."
         required
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
@@ -27,15 +26,14 @@
         >Estatus</label
       >
       <select
-        id="status"
-        name="status"
+        formControlName="status"
         required
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       >
         <option value="" disabled selected>Seleccione un estatus</option>
-        <option value="activo">Activo</option>
-        <option value="inactivo">Inactivo</option>
-        <option value="pendiente">Pendiente</option>
+        <option value="ACTIVE">Activo</option>
+        <option value="INACTIVE">Inactivo</option>
+
       </select>
     </div>
 
@@ -45,7 +43,7 @@
         type="submit"
         class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition"
       >
-        Guardar Tipo de Documento
+        {{ isEditMode ? 'Actualizar tipo de documento' : 'Guardar tipo de documento' }}
       </button>
     </div>
   </form>

@@ -1,0 +1,23 @@
+<div class="grid grid-cols-2 grid-rows-2 gap-2">
+  <div class="flex flex-col w-full">
+    <h1 class="text-3xl font-bold text-white mb-3">Registro de typo de documento</h1>
+
+    <document-type-form
+      class="w-full max-w-2xl"
+      [documentType]="documentToEdit"
+      (onSubmitForm)="onFormSubmitted()"
+    />
+  </div>
+
+  <div class="flex flex-col w-full bg-gray-900 h-[200px]"></div>
+
+  <div
+    class="col-span-2 row-start-2 mt-20 w-full h-[200px] flex flex-col justify-center rounded-lg shadow-md text-white"
+  >
+    <list-type-document
+      (editDocumentType)="onEditDocumentType($event)"
+      (reloadComponent)="reloadList()"
+      [documentType]="documentType()"
+    />
+  </div>
+</div>
