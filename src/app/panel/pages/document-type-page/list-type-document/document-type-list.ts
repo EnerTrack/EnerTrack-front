@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, EventEmitter, input, Output } from '@angular/core';
 
 
-import { DocumentTypeinterface, ContentDocumentType } from '../../../interfaces/documentType.interface';
+import { DocumentTypeContent, DocumentTypeinterface} from '../../../interfaces/documentType.interface';
 import { StatusTranslatePipe } from '../../../../pipes/StatusTranslate-pipe';
 
 @Component({
@@ -14,18 +14,18 @@ export class ListTypeDocument {
 
   //Emitimos evento al componente padre
   @Output() reloadComponent = new EventEmitter<void>();
-  @Output() editDocumentType = new EventEmitter<ContentDocumentType>();
+  @Output() editDocumentType = new EventEmitter< DocumentTypeContent>();
 
+  documentType = input.required<DocumentTypeinterface | null>();
 
   /* Metodo que emite el click para actualizar lista*/
   onClick() {
     this.reloadComponent.emit();
   }
 
-  documentType = input.required<DocumentTypeinterface | null>();
 
   /* Metodo que emite el valor que se va editar*/
-  onEdit(documentType: ContentDocumentType) {
+  onEdit(documentType:  DocumentTypeContent) {
     this.editDocumentType.emit(documentType);
   }
 
