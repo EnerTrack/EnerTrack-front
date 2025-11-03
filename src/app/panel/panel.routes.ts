@@ -5,7 +5,8 @@ import { ByCountryComponent } from './pages/by-country/by-country';
 import { EnergyRecordPage } from './pages/energy-record-page/energy-record-page';
 import { TypeEnergyPage } from './pages/type-energy-page/type-energy-page';
 import { PersonPage } from './pages/person-page/person-page';
-import { TypeDocumentPage } from './pages/type-document-page/type-document-page';
+import { TypeDocumentPage } from './pages/document-type-page/document-type-page';
+
 
 export const panelRoutes: Routes = [
   {

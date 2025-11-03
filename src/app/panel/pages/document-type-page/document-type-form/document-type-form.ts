@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DocumentTypeService } from '../../../service/documentType.service';
-import { ContentDocumentType } from '../../../interfaces/documentType.interface';
+import { DocumentTypeContent } from '../../../interfaces/documentType.interface';
 
 @Component({
   selector: 'document-type-form',
@@ -11,7 +11,7 @@ import { ContentDocumentType } from '../../../interfaces/documentType.interface'
 export class DocumenTypeForm implements OnChanges {
 
   /*Recibe el tipo de documento desde el componente padre.*/
-  @Input() documentType?: ContentDocumentType | null;
+  @Input() documentType?:  DocumentTypeContent | null;
 
   /*Emite un evento al componente padre cuando se guarda o actualiza el formulario */
   @Output() onSubmitForm = new EventEmitter<void>();
@@ -46,7 +46,7 @@ export class DocumenTypeForm implements OnChanges {
   /**
    * Getter que devuelve el valor actual del formularioen el formato de `ContentDocumentType`.
    */
-  get currentDocumentType(): ContentDocumentType {
+  get currentDocumentType():  DocumentTypeContent {
     return this.formDocumentType.value;
   }
 

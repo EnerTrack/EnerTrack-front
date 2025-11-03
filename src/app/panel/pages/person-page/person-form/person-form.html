@@ -1,0 +1,154 @@
+<section class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-6 w-full h-full">
+  <form
+    [formGroup]="formPerson"
+    (ngSubmit)="onSave()"
+    autocomplete="off"
+    class="grid gap-6 sm:grid-cols-2 w-full max-w-4xl"
+  >
+    <!-- Nombre -->
+    <div>
+      <label for="name" class="block mb-2 text-sm font-medium text-gray-300">Nombre</label>
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Ingrese el nombre"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('name')?.invalid && formPerson.get('name')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formPerson.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
+        </span>
+      }
+    </div>
+
+    <!-- Apellido -->
+    <div>
+      <label for="lastName" class="block mb-2 text-sm font-medium text-gray-300">Apellido</label>
+      <input
+        type="text"
+        formControlName="lastName"
+        placeholder="Ingrese el apellido"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('lastName')?.invalid && formPerson.get('lastName')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formPerson.get('lastName')?.errors?.['required'] ? 'El apellido es obligatorio' : '' }}
+
+        </span>
+      }
+    </div>
+
+    <!-- Correo electrónico -->
+    <div>
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Correo Electrónico</label>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Ingrese el correo"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('email')?.invalid && formPerson.get('email')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formPerson.get('email')?.errors?.['required'] ? 'El correo es obligatorio' : '' }}
+          {{ formPerson.get('email')?.errors?.['email'] ? 'Debe tener un formato válido' : '' }}
+        </span>
+      }
+    </div>
+
+    <!-- Teléfono -->
+    <div>
+      <label for="phone" class="block mb-2 text-sm font-medium text-gray-300">Teléfono</label>
+      <input
+        type="number"
+        formControlName="phone"
+        placeholder="Ingrese el teléfono"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('phone')?.invalid && formPerson.get('phone')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formPerson.get('phone')?.errors?.['required'] ? 'El teléfono es obligatorio' : '' }}
+        </span>
+      }
+    </div>
+
+    <!-- Documento -->
+    <div>
+      <label for="document" class="block mb-2 text-sm font-medium text-gray-300">Número de Documento</label>
+      <input
+        type="text"
+        formControlName="document"
+        placeholder="Ingrese el documento"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('document')?.invalid && formPerson.get('document')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formPerson.get('document')?.errors?.['required'] ? 'El documento es obligatorio' : '' }}
+        </span>
+      }
+    </div>
+
+    <!-- Tipo de Documento -->
+    <div>
+      <label for="documentType" class="block mb-2 text-sm font-medium text-gray-300">Tipo de Documento</label>
+      <select
+        formControlName="documentType"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+
+      <option value="" disabled selected>Seleccione tipo</option>
+      @for (type of documentType(); track $index) {
+        <option [value]="type.name">{{ type.name }}</option>
+      }
+
+      </select>
+      @if (formPerson.get('documentType')?.invalid && formPerson.get('documentType')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El tipo de documento es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- Fecha de Nacimiento -->
+    <div>
+      <label for="birthDate" class="block mb-2 text-sm font-medium text-gray-300">Fecha de Nacimiento</label>
+      <input
+        type="date"
+        formControlName="birthDate"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formPerson.get('birthDate')?.invalid && formPerson.get('birthDate')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          La fecha de nacimiento es obligatoria
+        </span>
+      }
+    </div>
+
+    <!-- Estado -->
+    <div>
+      <label for="status" class="block mb-2 text-sm font-medium text-gray-300">Estatus</label>
+      <select
+        formControlName="status"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+        <option value="" disabled selected>Seleccione estatus</option>
+        <option value="ACTIVE">Activo</option>
+        <option value="INACTIVE">Inactivo</option>
+      </select>
+      @if (formPerson.get('status')?.invalid && formPerson.get('status')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El estatus es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- Botón -->
+    <div class="sm:col-span-2 flex justify-end mt-4">
+      <button
+        type="submit"
+        class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition"
+      >
+        {{ isEditMode ? 'Actualizar persona' : 'Registrar persona' }}
+      </button>
+    </div>
+  </form>
+</section>

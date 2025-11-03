@@ -1,21 +1,27 @@
-export interface DocumentTypeinterface {
-  content:          DocumentTypeContent[];
+export interface PersonInterface {
+  content:          PersonContent[];
   pageable:         Pageable;
   last:             boolean;
-  totalElements:    number;
   totalPages:       number;
+  totalElements:    number;
   size:             number;
   number:           number;
   sort:             Sort;
-  first:            boolean;
   numberOfElements: number;
+  first:            boolean;
   empty:            boolean;
 }
 
-export interface DocumentTypeContent {
-  id:     string;
-  name:   string;
-  status: string;
+export interface PersonContent {
+  id:           string;
+  name:         string;
+  lastName:     string;
+  email:        string;
+  phone:        number;
+  document:     string;
+  birthDate:    Date;
+  status:       string;
+  documentType: string;
 }
 
 export interface Pageable {

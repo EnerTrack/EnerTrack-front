@@ -16,6 +16,11 @@
         required
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
+      @if (formDocumentType.get('name')?.invalid && formDocumentType.get('name')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formDocumentType.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
+        </span>
+      }
     </div>
 
     <!-- Estatus -->
@@ -35,6 +40,11 @@
         <option value="INACTIVE">Inactivo</option>
 
       </select>
+      @if (formDocumentType.get('status')?.invalid && formDocumentType.get('status')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El estatus es obligatorio
+        </span>
+      }
     </div>
 
     <!-- Botón -->

@@ -1,10 +1,33 @@
 <div class="p-6 bg-[#0f172a] rounded-xl text-white w-full">
-  <h2 class="text-lg font-semibold mb-4">Lista de Personas</h2>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold text-gray-200">Lista de personas</h2>
+
+    <button
+      class="flex items-center justify-center p-1 mr-3 bg-green-500 hover:bg-green-800 text-white rounded-lg transition-colors"
+      title="Actualizar lista"
+      (click)="onClick()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M19 8l-4 4h3c0 3.31-2.69 6-6 6c-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6c1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4l4-4H6z"
+        >
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            dur="5s"
+            from="360 12 12"
+            repeatCount="indefinite"
+            to="0 12 12"
+            type="rotate"
+          />
+        </path>
+      </svg>
+    </button>
+  </div>
 
   <div class="overflow-x-auto">
-    <table
-      class="min-w-full border border-gray-700 rounded-lg overflow-hidden text-sm"
-    >
+    <table class="min-w-full border border-gray-700 rounded-lg overflow-hidden text-sm">
       <thead class="bg-gray-800 text-gray-300">
         <tr>
           <th class="px-4 py-2 text-left">Nombre</th>
@@ -20,7 +43,7 @@
       </thead>
 
       <tbody class="divide-y divide-gray-700">
-        @for (person of persons; track person.id) {
+        @for (person of person()?.content; track person.id) {
         <tr class="hover:bg-gray-800 transition">
           <td class="px-4 py-2">{{ person.name }}</td>
           <td class="px-4 py-2">{{ person.lastName }}</td>
@@ -29,34 +52,28 @@
           <td class="px-4 py-2">{{ person.document }}</td>
           <td class="px-4 py-2">{{ person.documentType }}</td>
           <td class="px-4 py-2">
-            {{ person.birthDate | date: "yyyy-MM-dd" }}
+            {{ person.birthDate | date : 'yyyy-MM-dd' }}
           </td>
           <td class="px-4 py-2">
             <span
               class="px-2 py-1 rounded-full text-xs font-medium"
               [ngClass]="{
-                'bg-green-700 text-green-100': person.status === 'activo',
-                'bg-yellow-700 text-yellow-100': person.status === 'pendiente',
-                'bg-red-700 text-red-100': person.status === 'inactivo'
+                'bg-green-700 text-green-100': person.status === 'ACTIVE',
+                'bg-red-700 text-red-100': person.status === 'INACTIVE'
               }"
             >
-              {{ person.status | titlecase }}
+              {{ person.status | statusTranslate }}
             </span>
           </td>
 
           <td class="px-4 py-2 text-center flex justify-center gap-4">
             <!-- Botón Editar -->
             <button
-              (click)="onEdit(person)"
+              (click)="onEditPerson(person)"
               class="text-blue-400 hover:text-blue-300 transition-transform transform hover:scale-110"
               title="Editar"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                 <g
                   fill="none"
                   stroke="currentColor"
@@ -64,11 +81,7 @@
                   stroke-linejoin="round"
                   stroke-width="2"
                 >
-                  <path
-                    stroke-dasharray="20"
-                    stroke-dashoffset="20"
-                    d="M3 21h18"
-                  >
+                  <path stroke-dasharray="20" stroke-dashoffset="20" d="M3 21h18">
                     <animate
                       fill="freeze"
                       attributeName="stroke-dashoffset"
@@ -98,11 +111,7 @@
                       values="48;0"
                     />
                   </path>
-                  <path
-                    stroke-dasharray="8"
-                    stroke-dashoffset="8"
-                    d="M14 6l4 4"
-                  >
+                  <path stroke-dasharray="8" stroke-dashoffset="8" d="M14 6l4 4">
                     <animate
                       fill="freeze"
                       attributeName="stroke-dashoffset"
@@ -117,16 +126,10 @@
 
             <!-- Botón Eliminar -->
             <button
-              (click)="onDelete(person)"
               class="text-red-500 hover:text-red-400 transition-transform transform hover:scale-110"
               title="Eliminar"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                 <g
                   fill="none"
                   stroke="currentColor"
@@ -134,11 +137,7 @@
                   stroke-linejoin="round"
                   stroke-width="2"
                 >
-                  <path
-                    stroke-dasharray="64"
-                    stroke-dashoffset="64"
-                    d="M13 3l6 6v12h-14v-18h8"
-                  >
+                  <path stroke-dasharray="64" stroke-dashoffset="64" d="M13 3l6 6v12h-14v-18h8">
                     <animate
                       fill="freeze"
                       attributeName="stroke-dashoffset"
@@ -160,11 +159,7 @@
                       values="14;0"
                     />
                   </path>
-                  <path
-                    stroke-dasharray="10"
-                    stroke-dashoffset="10"
-                    d="M9 11l6 6"
-                  >
+                  <path stroke-dasharray="10" stroke-dashoffset="10" d="M9 11l6 6">
                     <animate
                       fill="freeze"
                       attributeName="stroke-dashoffset"
@@ -173,11 +168,7 @@
                       values="10;0"
                     />
                   </path>
-                  <path
-                    stroke-dasharray="10"
-                    stroke-dashoffset="10"
-                    d="M15 11l-6 6"
-                  >
+                  <path stroke-dasharray="10" stroke-dashoffset="10" d="M15 11l-6 6">
                     <animate
                       fill="freeze"
                       attributeName="stroke-dashoffset"

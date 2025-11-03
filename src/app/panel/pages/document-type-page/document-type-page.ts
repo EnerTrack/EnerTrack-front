@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { DocumenTypeForm } from "./document-type-form/document-type-form";
 import { ListTypeDocument } from "./list-type-document/document-type-list";
 import { DocumentTypeService } from '../../service/documentType.service';
-import { ContentDocumentType, DocumentTypeinterface } from '../../interfaces/documentType.interface';
+import { DocumentTypeContent, DocumentTypeinterface } from '../../interfaces/documentType.interface';
 
 @Component({
   selector: 'type-document-page',
@@ -15,7 +15,7 @@ export class TypeDocumentPage implements OnInit {
   documentType = signal<DocumentTypeinterface | null>(null);
 
   /*Almacena el documentos para editar*/
-  documentToEdit?: ContentDocumentType | null = null;
+  documentToEdit?:  DocumentTypeContent | null = null;
 
   ngOnInit(): void {
     this.getDocumentType();
@@ -33,7 +33,7 @@ export class TypeDocumentPage implements OnInit {
     this.documentTypeService.getDocumentType().subscribe(
       (response: DocumentTypeinterface) => {
         this.documentType.set(response);
-        console.log(response);
+        
       },
       (error) => {
         // Manejo de errores de la petición HTTP
@@ -45,7 +45,7 @@ export class TypeDocumentPage implements OnInit {
   /**
    * Método que recibe el documento a editar desde el componente hijo `list-type-document`
    */
-  onEditDocumentType(document: ContentDocumentType) {
+  onEditDocumentType(document:  DocumentTypeContent) {
     this.documentToEdit = document;
   }
 
