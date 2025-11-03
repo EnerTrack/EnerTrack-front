@@ -1,7 +1,8 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
- import { providePrimeNG } from 'primeng/config';
+import { providePrimeNG } from 'primeng/config';
+import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { MyPreset } from './theme/my-preset';
@@ -12,11 +13,12 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-     providePrimeNG({
-     ripple: true,
-     theme: {
-       preset: MyPreset
-     }
-   })
+    provideHttpClient(),
+    providePrimeNG({
+      ripple: true,
+      theme: {
+        preset: MyPreset
+      }
+    })
   ]
 };

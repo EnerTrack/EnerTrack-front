@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { GeneratedPerson } from "./generated-person/generated-person";
-import { GeneratedTypeDocument } from "../type-document-page/generated-type-document/generated-type-document";
-import { ListTypeDocument } from "../type-document-page/list-type-document/list-type-document";
 import { ListPerson } from "./list-person/list-person";
 
 @Component({
