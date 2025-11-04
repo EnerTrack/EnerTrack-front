@@ -4,21 +4,31 @@
 
     <h1 class="text-3xl font-bold text-white mb-3">Registro de personas</h1>
 
-    <document-type-form class="w-full max-w-2xl"/>
+    <energy-type-form
+      class="w-full max-w-2xl"
+      [energyType]="energyTypeToEdit"
+      (onSubmitForm)="onFormSubmitted()"
+
+    />
 
   </div>
 
-  <div class="flex flex-col w-full">
-
-
-   2
-
+  <div class="flex justify-center items-center">
+    <img
+      src="./images/image3.webp"
+      alt="Ilustración ecológica"
+      class="max-w-md w-full h-auto rounded-xl object-contain"
+    />
   </div>
 
   <div
     class="col-span-2 row-start-2 mt-18 w-full h-[200px] flex flex-col justify-center rounded-lg shadow-md text-white"
   >
-    <h1 class="mb-3 text-3xl font-bold text-gray-800 dark:text-white">Lista de Energía Generada</h1>
-    <list-energy-type></list-energy-type>
+
+    <energy-type-list
+      (editEnergyType)="onEditEnergyType($event)"
+      (reloadComponent)="reloadList()"
+      [energyType]="energyType()"
+    />
   </div>
 </div>

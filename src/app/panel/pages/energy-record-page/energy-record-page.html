@@ -6,20 +6,29 @@
       Registro de Energía Generada
     </h1>
     <!-- Formulario -->
-    <generated-energy class="w-full max-w-2xl"></generated-energy>
+    <energy-record-form
+     class="w-full max-w-2xl"
+     [energyRecord]="energyRecordToEdit"
+     (onSubmitForm)="onFormSubmitted()"
+    />
   </div>
 
-  <div
-    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center w-full h-[200px] text-white"
-  >2
+    <div class="flex justify-center items-center">
+    <img
+      src="./images/image4.webp"
+      alt="Ilustración ecológica"
+      class="max-w-md w-full h-auto rounded-xl object-contain"
+    />
   </div>
 
   <div
     class="col-span-2 row-start-2 mt-18 w-full h-[200px] flex flex-col justify-center rounded-lg shadow-md text-white"
   >
-    <h1 class="mb-3 text-3xl font-bold text-gray-800 dark:text-white">
-      Lista de Energía Generada
-    </h1>
-    <list-energy></list-energy>
+
+    <list-energy
+    (editEnergyRecord)="onEditEnergyRecord($event)"
+    (reloadComponent)="reloadList()"
+    [energyRecord]="energyRecord()"
+    />
   </div>
 </div>

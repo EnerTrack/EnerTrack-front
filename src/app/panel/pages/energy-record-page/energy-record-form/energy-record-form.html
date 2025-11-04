@@ -1,0 +1,228 @@
+<section
+  class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-3 w-full h-full"
+>
+  <form
+    [formGroup]="formEnergyRecord"
+    (ngSubmit)="onSave()"
+    class="grid gap-6 sm:grid-cols-2 w-full max-w-4xl"
+  >
+    <!-- País -->
+    <div>
+      <label for="country" class="block mb-2 text-sm font-medium text-gray-300"
+        >País</label
+      >
+      <select
+        id="country"
+        formControlName="country"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+        <option value="" disabled>Seleccione un país</option>
+
+        @for (country of countries(); track $index) {
+          <option [value]="country.translations.spa?.common">
+            {{ country.translations.spa?.common }}
+          </option>
+        }
+      </select>
+
+      @if (formEnergyRecord.get('country')?.invalid && formEnergyRecord.get('country')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El país es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- Año -->
+    <div>
+      <label for="year" class="block mb-2 text-sm font-medium text-gray-300"
+        >Año</label
+      >
+      <input
+        type="number"
+        id="year"
+        formControlName="year"
+        placeholder="Ingrese el año"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('year')?.invalid && formEnergyRecord.get('year')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          @if (formEnergyRecord.get('year')?.errors?.['required']) {
+            El año es obligatorio
+          }
+          @if (formEnergyRecord.get('year')?.errors?.['min']) {
+            El año no puede ser menor a 1900
+          }
+          @if (formEnergyRecord.get('year')?.errors?.['max']) {
+            El año no puede ser mayor a 2100
+          }
+        </span>
+      }
+    </div>
+
+    <!-- Energía Generada -->
+    <div>
+      <label
+        for="generatedMwh"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Energía Generada (MWh)</label
+      >
+      <input
+        type="number"
+        id="generatedMwh"
+        formControlName="generatedMwh"
+        placeholder="Ingrese energía generada"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('generatedMwh')?.invalid && formEnergyRecord.get('generatedMwh')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          @if (formEnergyRecord.get('generatedMwh')?.errors?.['required']) {
+            Este campo es obligatorio
+          }
+          @if (formEnergyRecord.get('generatedMwh')?.errors?.['min']) {
+            Debe ser un valor mayor o igual a 0
+          }
+        </span>
+      }
+    </div>
+
+    <!-- Capacidad -->
+    <div>
+      <label
+        for="capacityMwh"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Capacidad (MWh)</label
+      >
+      <input
+        type="number"
+        id="capacityMwh"
+        formControlName="capacityMwh"
+        placeholder="Ingrese capacidad"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('capacityMwh')?.invalid && formEnergyRecord.get('capacityMwh')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          @if (formEnergyRecord.get('capacityMwh')?.errors?.['required']) {
+            Este campo es obligatorio
+          }
+          @if (formEnergyRecord.get('capacityMwh')?.errors?.['min']) {
+            Debe ser un valor mayor o igual a 0
+          }
+        </span>
+      }
+    </div>
+
+    <!-- Reducción de Emisiones -->
+    <div>
+      <label
+        for="emissionReductionTons"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Reducción de Emisiones (ton)</label
+      >
+      <input
+        type="number"
+        id="emissionReductionTons"
+        formControlName="emissionReductionTons"
+        placeholder="Ingrese reducción de emisiones"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('emissionReductionTons')?.invalid && formEnergyRecord.get('emissionReductionTons')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          Debe ser un valor mayor o igual a 0
+        </span>
+      }
+    </div>
+
+    <!-- Inversión -->
+    <div>
+      <label
+        for="investmentUsd"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Inversión (USD)</label
+      >
+      <input
+        type="number"
+        id="investmentUsd"
+        formControlName="investmentUsd"
+        placeholder="Ingrese monto de inversión"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('investmentUsd')?.invalid && formEnergyRecord.get('investmentUsd')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          Debe ser un valor mayor o igual a 0
+        </span>
+      }
+    </div>
+
+    <!-- Valor Fuente -->
+    <div>
+      <label for="source" class="block mb-2 text-sm font-medium text-gray-300"
+        >Valor Fuente</label
+      >
+      <input
+        type="number"
+        id="source"
+        formControlName="source"
+        placeholder="Ingrese valor fuente"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('source')?.invalid && formEnergyRecord.get('source')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El valor fuente es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- Tipo de Energía -->
+    <div>
+      <label
+        for="energyTypeName"
+        class="block mb-2 text-sm font-medium text-gray-300"
+        >Tipo de Energía</label
+      >
+      <select
+        id="energyTypeName"
+        formControlName="energyTypeName"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      >
+        <option value="" disabled>Seleccione tipo de energía</option>
+        @for (energyType of energyTypes()?.content; track $index) {
+          <option [value]="energyType.name">{{ energyType.name }}</option>
+        }
+      </select>
+      @if (formEnergyRecord.get('energyTypeName')?.invalid && formEnergyRecord.get('energyTypeName')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El tipo de energía es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- ID Usuario -->
+    <div class="sm:col-span-2">
+      <label for="userId" class="block mb-2 text-sm font-medium text-gray-300"
+        >ID de Usuario</label
+      >
+      <input
+        type="text"
+        id="userId"
+        formControlName="userId"
+        placeholder="Ingrese su ID de usuario"
+        class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
+      />
+      @if (formEnergyRecord.get('userId')?.invalid && formEnergyRecord.get('userId')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El ID de usuario es obligatorio
+        </span>
+      }
+    </div>
+
+    <!-- Botón -->
+    <div class="sm:col-span-2 flex justify-end">
+      <button
+        type="submit"
+        class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center transition"
+      >
+        {{ isEditMode ? 'Actualizar registro energético' : 'Enviar registro energético' }}
+      </button>
+    </div>
+  </form>
+</section>

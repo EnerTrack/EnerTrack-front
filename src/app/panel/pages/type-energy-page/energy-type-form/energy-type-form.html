@@ -1,8 +1,8 @@
 <section
   class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-5 w-full h-full"
 >
-  <form class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl">
-    <!-- Nombre del tipo de energía -->
+  <form [formGroup]="formEnergyType" (ngSubmit)="onSave()" class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl">
+
     <div class="sm:col-span-2">
       <label
         for="energyTypeName"
@@ -11,12 +11,16 @@
       >
       <input
         type="text"
-        id="energyTypeName"
-        name="energyTypeName"
+        formControlName="name"
         placeholder="Ej: Solar, Eólica, Hidráulica..."
         required
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
+      @if (formEnergyType.get('name')?.invalid && formEnergyType.get('name')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          {{ formEnergyType.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
+        </span>
+      }
     </div>
 
     <div class="sm:col-span-2">
@@ -26,16 +30,19 @@
         >Estatus</label
       >
       <select
-        id="status"
-        name="status"
+        formControlName="status"
         required
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       >
         <option value="" disabled selected>Seleccione un estatus</option>
-        <option value="activo">Activo</option>
-        <option value="inactivo">Inactivo</option>
-        <option value="pendiente">Pendiente</option>
+        <option value="ACTIVE">Activo</option>
+        <option value="INACTIVE">Inactivo</option>
       </select>
+      @if (formEnergyType.get('status')?.invalid && formEnergyType.get('status')?.touched) {
+        <span class="text-red-500 text-xs mt-1 block">
+          El estatus es obligatorio
+        </span>
+      }
     </div>
 
     <!-- Botón -->
