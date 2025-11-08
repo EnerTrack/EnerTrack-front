@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DataCountryInterface } from '../../interfaces/countryData.interface';
+import { CommonModule, NgClass } from '@angular/common';
 
 @Component({
   selector: 'card-anality',
-  imports: [],
+  imports: [NgClass, CommonModule],
   templateUrl: './card-anality.component.html',
 })
-export class CardAnality { }
+export class CardAnality {
+
+    @Input() countryData!: DataCountryInterface;
+ }
