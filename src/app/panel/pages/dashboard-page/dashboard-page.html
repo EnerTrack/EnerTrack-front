@@ -1,36 +1,48 @@
-<div class="grid grid-cols-3 grid-rows-[auto_1fr_1fr] gap-4 p-6 min-h-screen">
-  <!-- Fila 1 -->
-  <div class=" bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[120px] text-white">
-    <card-anality/>
+<div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 p-6 min-h-screen">
+  <!-- ===== FILA 1 ===== -->
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[120px] text-white"
+  >
+    <card-anality [countryData]="countryData()![0]" />
   </div>
 
-  <div class=" bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105  w-full h-[120px] text-white">
-    <card-anality/>
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[120px] text-white"
+  >
+    <card-anality [countryData]="countryData()![1]" />
   </div>
 
-  <div class=" bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[120px] text-white">
-    <card-anality/>
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[120px] text-white"
+  >
+    <card-anality [countryData]="countryData()![2]" />
   </div>
 
-  <!-- Fila 2 -->
-  <div class="col-span-2 bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[420px]">
-    <div echarts [options]="option" class="w-full h-full"></div>
+  <!-- ===== FILA 2 ===== -->
+  <div class="lg:col-span-2 bg-gray-900 rounded-lg shadow-md p-2">
+    <chart-top5 />
   </div>
 
-  <div class="col-start-3 b w-full h-[420px] rounded-lg shadow bg-gray-900">
-    <div echarts [options]="optionb" class="w-full h-full"></div>
+  <div class="bg-gray-900 rounded-lg shadow-md p-2">
+    <chart-energy-type />
   </div>
 
-  <!-- Fila 3 -->
-  <div class="row-start-3 bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105  w-full h-[200px] text-white">
+  <!-- ===== FILA 3 ===== -->
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[200px] text-white"
+  >
     7
   </div>
 
-  <div class="row-start-3  bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[200px] text-white">
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[200px] text-white"
+  >
     8
   </div>
 
-  <div class="row-start-3  bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[200px] text-white">
+  <div
+    class="bg-gray-900 rounded-lg shadow-md flex justify-center items-center transform transition duration-300 hover:scale-105 w-full h-[200px] text-white"
+  >
     9
   </div>
 </div>

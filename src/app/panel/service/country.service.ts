@@ -9,8 +9,6 @@ import { CountryInterface } from '../interfaces/country.interface';
 })
 export class CountryService {
 
-
-
   private http = inject(HttpClient);
   private baseULR: string = environment.baseURL;
   private countryURL: string = environment.countryURL;
@@ -19,5 +17,4 @@ export class CountryService {
 
     return this.http.get<CountryInterface[]>(this.countryURL);
   }
-
 }
