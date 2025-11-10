@@ -34,8 +34,7 @@ export class EnergyTypeService {
   /* Metodo para validar un tipo de documento*/
   validateName(name: string): Observable<ValidatorInterface> {
     return this.http.get<ValidatorInterface>(
-      `${this.baseULR}/energy/energy-type/validate-name`,
-      { params: { name } }
+      `${this.baseULR}/energy/energy-type/validate-name`, { params: { name } }
     );
   }
 }

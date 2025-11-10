@@ -1,5 +1,5 @@
 import { AbstractControl, AsyncValidatorFn, ValidationErrors, FormArray, FormGroup } from "@angular/forms";
-import { map, catchError, of } from "rxjs";
+import { map, catchError, of, Observable } from "rxjs";
 import { EnergyTypeService } from "../panel/service/energyType.service";
 import { ValidatorInterface } from "../panel/interfaces/asyncValidator.interface";
 
@@ -17,6 +17,8 @@ export class FormUtils {
           return `Valor mínimo de ${errors['min'].min}`;
         case 'nameTaken':
           return 'Este nombre ya existe';
+        case 'documentTaken':
+          return 'Este documento ya existe'
 
         default:
           return 'Error no controlado'
@@ -47,26 +49,39 @@ export class FormUtils {
     return this.getTextError(errors);
   }
 
-   // Validador asíncrono genérico
- static asyncNameValidator(energyTypeService: EnergyTypeService): AsyncValidatorFn {
+   /**
+   * Validador asíncrono genérico que funciona con cualquier servicio.
+   *
+   * @param service - Servicio que contiene un método de validación.
+   * @param methodName - Nombre del método del servicio (por ejemplo: 'validateName', 'validateEmail').
+   * @param errorKey - Clave del error que se devolverá si ya existe (por defecto: 'valueTaken').
+   */
+  static asyncUniqueValidator(
+    service: any,
+    methodName: string,
+    errorKey: string = 'valueTaken'
+  ): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      const name = control.value?.trim();
+      const value = control.value?.trim();
+      if (!value) return of(null); // Si no hay valor, no valida
 
-      console.log(`1: ${name}`);
+      console.log(`value: ${value}`);
 
-      // Si el campo está vacío o sin tocar, no ejecutamos validación
-      if (!name) return of(null);
+      // Verifica si el método existe
+      if (typeof service[methodName] !== 'function') {
+        console.error(`❌ El método '${methodName}' no existe en el servicio proporcionado`);
+        return of(null);
+      }
 
-      // Llamamos al backend
-      return energyTypeService.validateName(name).pipe(
+      // Ejecuta la validación
+      const result$: Observable<ValidatorInterface> = service[methodName](value);
+
+      return result$.pipe(
         map((response: ValidatorInterface) =>
-          response.exists ? { nameTaken: true } : null
+          response.exists ? { [errorKey]: true } : null
         ),
-
         catchError(() => of(null))
-        
       );
     };
   }
-
 }

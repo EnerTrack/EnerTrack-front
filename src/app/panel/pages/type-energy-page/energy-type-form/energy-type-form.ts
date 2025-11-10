@@ -25,7 +25,7 @@ export class GeneratedEnergyType implements OnChanges {
   formEnergyType: FormGroup = this.fb.group({
     name: this.fb.control('', {
       validators: [Validators.required, Validators.minLength(3)],
-      asyncValidators: [FormUtils.asyncNameValidator(this.energyTypeService)],
+      asyncValidators: [FormUtils.asyncUniqueValidator(this.energyTypeService, 'validateName', 'nameTaken')],
       updateOn: 'blur'
     }),
     status: ['', [Validators.required]],

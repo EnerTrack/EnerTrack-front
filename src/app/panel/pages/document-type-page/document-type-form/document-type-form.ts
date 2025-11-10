@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, inject, OnChanges, SimpleChange
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DocumentTypeService } from '../../../service/documentType.service';
 import { DocumentTypeContent } from '../../../interfaces/documentType.interface';
+import { FormUtils } from '../../../../utils/form-util';
 
 @Component({
   selector: 'document-type-form',
@@ -24,7 +25,7 @@ export class DocumenTypeForm implements OnChanges {
 
 
   formDocumentType: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
+    name: ['', [Validators.required, Validators.minLength(3)], [FormUtils.asyncUniqueValidator(this.documentTypeService,  'validateName', 'nameTaken')]],
     status: ['', [Validators.required]],
   });
 
@@ -86,7 +87,7 @@ export class DocumenTypeForm implements OnChanges {
             ) {
               alert('⚠️ Este documento ya existe en la base de datos');
             }
-            
+
           },
         });
     }

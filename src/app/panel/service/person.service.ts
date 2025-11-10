@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environments.prod';
 import { Observable } from 'rxjs';
 import { PersonContent, PersonInterface } from '../interfaces/person.interfaces';
+import { ValidatorInterface } from '../interfaces/asyncValidator.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,10 @@ export class PersonService {
     return this.http.put<PersonContent>(`${this.baseULR}/users/person/${id}`, person);
   }
 
+  /* Metodo para validar un documento*/
+  validateDocument(document: string): Observable<ValidatorInterface> {
+    return this.http.get<ValidatorInterface>(`${this.baseULR}/users/person/validate-document`,
+      { params: { document } }
+    );
+  }
 }

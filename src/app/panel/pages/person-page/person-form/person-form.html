@@ -15,9 +15,9 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('name')?.invalid && formPerson.get('name')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formPerson.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        {{ formPerson.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
+      </span>
       }
     </div>
 
@@ -31,16 +31,17 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('lastName')?.invalid && formPerson.get('lastName')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formPerson.get('lastName')?.errors?.['required'] ? 'El apellido es obligatorio' : '' }}
-
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        {{ formPerson.get('lastName')?.errors?.['required'] ? 'El apellido es obligatorio' : '' }}
+      </span>
       }
     </div>
 
     <!-- Correo electrónico -->
     <div>
-      <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Correo Electrónico</label>
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-300"
+        >Correo Electrónico</label
+      >
       <input
         type="email"
         formControlName="email"
@@ -48,10 +49,10 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('email')?.invalid && formPerson.get('email')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formPerson.get('email')?.errors?.['required'] ? 'El correo es obligatorio' : '' }}
-          {{ formPerson.get('email')?.errors?.['email'] ? 'Debe tener un formato válido' : '' }}
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        {{ formPerson.get('email')?.errors?.['required'] ? 'El correo es obligatorio' : '' }}
+        {{ formPerson.get('email')?.errors?.['email'] ? 'Debe tener un formato válido' : '' }}
+      </span>
       }
     </div>
 
@@ -65,15 +66,17 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('phone')?.invalid && formPerson.get('phone')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formPerson.get('phone')?.errors?.['required'] ? 'El teléfono es obligatorio' : '' }}
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        {{ formPerson.get('phone')?.errors?.['required'] ? 'El teléfono es obligatorio' : '' }}
+      </span>
       }
     </div>
 
     <!-- Documento -->
     <div>
-      <label for="document" class="block mb-2 text-sm font-medium text-gray-300">Número de Documento</label>
+      <label for="document" class="block mb-2 text-sm font-medium text-gray-300"
+        >Número de Documento</label
+      >
       <input
         type="text"
         formControlName="document"
@@ -81,45 +84,51 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('document')?.invalid && formPerson.get('document')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formPerson.get('document')?.errors?.['required'] ? 'El documento es obligatorio' : '' }}
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        @if (formPerson.get('document')?.errors?.['required']) {
+          El documento es obligatorio
+        } @else if (formPerson.get('document')?.errors?.['minlength']) {
+          Mínimo 5 caracteres
+        } @else if (formPerson.get('document')?.errors?.['maxlength']) {
+          Máximo 15 caracteres
+        } @else if (formPerson.get('document')?.errors?.['documentTaken']) {
+          Este documento ya existe
+        }
+      </span>
       }
     </div>
 
     <!-- Tipo de Documento -->
     <div>
-      <label for="documentType" class="block mb-2 text-sm font-medium text-gray-300">Tipo de Documento</label>
+      <label for="documentType" class="block mb-2 text-sm font-medium text-gray-300"
+        >Tipo de Documento</label
+      >
       <select
         formControlName="documentType"
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       >
-
-      <option value="" disabled selected>Seleccione tipo</option>
-      @for (type of documentType(); track $index) {
+        <option value="" disabled selected>Seleccione tipo</option>
+        @for (type of documentType(); track $index) {
         <option [value]="type.name">{{ type.name }}</option>
-      }
-
+        }
       </select>
       @if (formPerson.get('documentType')?.invalid && formPerson.get('documentType')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          El tipo de documento es obligatorio
-        </span>
+      <span class="text-red-500 text-xs mt-1 block"> El tipo de documento es obligatorio </span>
       }
     </div>
 
     <!-- Fecha de Nacimiento -->
     <div>
-      <label for="birthDate" class="block mb-2 text-sm font-medium text-gray-300">Fecha de Nacimiento</label>
+      <label for="birthDate" class="block mb-2 text-sm font-medium text-gray-300"
+        >Fecha de Nacimiento</label
+      >
       <input
         type="date"
         formControlName="birthDate"
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formPerson.get('birthDate')?.invalid && formPerson.get('birthDate')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          La fecha de nacimiento es obligatoria
-        </span>
+      <span class="text-red-500 text-xs mt-1 block"> La fecha de nacimiento es obligatoria </span>
       }
     </div>
 
@@ -135,9 +144,7 @@
         <option value="INACTIVE">Inactivo</option>
       </select>
       @if (formPerson.get('status')?.invalid && formPerson.get('status')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          El estatus es obligatorio
-        </span>
+      <span class="text-red-500 text-xs mt-1 block"> El estatus es obligatorio </span>
       }
     </div>
 
