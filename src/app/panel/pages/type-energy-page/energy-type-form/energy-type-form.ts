@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, OnChanges, Output, SimpleChange
 import { EnergyTypeContent, EnergyTypeInterface } from '../../../interfaces/energyType.interface';
 import { EnergyTypeService } from '../../../service/energyType.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormUtils } from '../../../../utils/form-util';
 
 @Component({
   selector: 'energy-type-form',
@@ -16,12 +17,17 @@ export class GeneratedEnergyType implements OnChanges {
 
   isEditMode = false;
 
+
   private energyTypeService = inject(EnergyTypeService);
   private fb = inject(FormBuilder);
 
 
   formEnergyType: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
+    name: this.fb.control('', {
+      validators: [Validators.required, Validators.minLength(3)],
+      asyncValidators: [FormUtils.asyncNameValidator(this.energyTypeService)],
+      updateOn: 'blur'
+    }),
     status: ['', [Validators.required]],
   });
 

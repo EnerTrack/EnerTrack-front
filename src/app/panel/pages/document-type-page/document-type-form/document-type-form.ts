@@ -11,7 +11,7 @@ import { DocumentTypeContent } from '../../../interfaces/documentType.interface'
 export class DocumenTypeForm implements OnChanges {
 
   /*Recibe el tipo de documento desde el componente padre.*/
-  @Input() documentType?:  DocumentTypeContent | null;
+  @Input() documentType?: DocumentTypeContent | null;
 
   /*Emite un evento al componente padre cuando se guarda o actualiza el formulario */
   @Output() onSubmitForm = new EventEmitter<void>();
@@ -46,7 +46,7 @@ export class DocumenTypeForm implements OnChanges {
   /**
    * Getter que devuelve el valor actual del formularioen el formato de `ContentDocumentType`.
    */
-  get currentDocumentType():  DocumentTypeContent {
+  get currentDocumentType(): DocumentTypeContent {
     return this.formDocumentType.value;
   }
 
@@ -70,14 +70,27 @@ export class DocumenTypeForm implements OnChanges {
           this.resetForm();
         });
     } else {
-      //Si estamos en modo creación (nuevo registro)
+      // Si estamos en modo creación (nuevo registro)
       this.documentTypeService
         .createDocumentType(this.currentDocumentType)
-        .subscribe(() => {
-          alert('✅ Documento creado correctamente');
-          this.resetForm();
+        .subscribe({
+          next: () => {
+            alert('✅ Documento creado correctamente');
+            this.resetForm();
+          },
+          error: (err) => {
+            // 🧠 Aquí capturamos el error 400 del backend
+            if (
+              err.status === 400 &&
+              err.error?.errors?.[0]?.toLowerCase().includes('already exists')
+            ) {
+              alert('⚠️ Este documento ya existe en la base de datos');
+            }
+            
+          },
         });
     }
+
   }
 
   /**

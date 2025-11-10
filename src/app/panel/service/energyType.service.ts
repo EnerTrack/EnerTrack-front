@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environments.prod';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { EnergyTypeContent, EnergyTypeInterface } from '../interfaces/energyType.interface';
+import { ValidatorInterface } from '../interfaces/asyncValidator.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,11 @@ export class EnergyTypeService {
     return this.http.put<EnergyTypeContent>(`${this.baseULR}/energy/energy-type/${id}`, documentType)
   }
 
+  /* Metodo para validar un tipo de documento*/
+  validateName(name: string): Observable<ValidatorInterface> {
+    return this.http.get<ValidatorInterface>(
+      `${this.baseULR}/energy/energy-type/validate-name`,
+      { params: { name } }
+    );
+  }
 }

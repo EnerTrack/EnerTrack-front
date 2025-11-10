@@ -1,12 +1,11 @@
-<section
-  class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-5 w-full h-full"
->
-  <form [formGroup]="formEnergyType" (ngSubmit)="onSave()" class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl">
-
+<section class="flex flex-col justify-start items-center bg-gray-900 rounded-lg p-5 w-full h-full">
+  <form
+    [formGroup]="formEnergyType"
+    (ngSubmit)="onSave()"
+    class="grid gap-6 sm:grid-cols-2 w-full max-w-2xl"
+  >
     <div class="sm:col-span-2">
-      <label
-        for="energyTypeName"
-        class="block mb-2 text-sm font-medium text-gray-300"
+      <label for="energyTypeName" class="block mb-2 text-sm font-medium text-gray-300"
         >Nombre del Tipo de Energía</label
       >
       <input
@@ -17,18 +16,16 @@
         class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5"
       />
       @if (formEnergyType.get('name')?.invalid && formEnergyType.get('name')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          {{ formEnergyType.get('name')?.errors?.['required'] ? 'El nombre es obligatorio' : '' }}
-        </span>
+      <span class="text-red-500 text-xs mt-1 block">
+        @if (formEnergyType.get('name')?.errors?.['required']) { El nombre es obligatorio } @else if
+        (formEnergyType.get('name')?.errors?.['minlength']) { Mínimo 3 caracteres } @else if
+        (formEnergyType.get('name')?.errors?.['nameTaken']) { Este nombre ya existe }
+      </span>
       }
     </div>
 
     <div class="sm:col-span-2">
-      <label
-        for="status"
-        class="block mb-2 text-sm font-medium text-gray-300"
-        >Estatus</label
-      >
+      <label for="status" class="block mb-2 text-sm font-medium text-gray-300">Estatus</label>
       <select
         formControlName="status"
         required
@@ -39,9 +36,7 @@
         <option value="INACTIVE">Inactivo</option>
       </select>
       @if (formEnergyType.get('status')?.invalid && formEnergyType.get('status')?.touched) {
-        <span class="text-red-500 text-xs mt-1 block">
-          El estatus es obligatorio
-        </span>
+      <span class="text-red-500 text-xs mt-1 block"> El estatus es obligatorio </span>
       }
     </div>
 
