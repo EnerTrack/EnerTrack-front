@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { DocumentTypeService } from '../../../service/documentType.service';
 import { DocumentTypeContent, DocumentTypeinterface } from '../../../interfaces/documentType.interface';
 import { SelectModule } from 'primeng/select';
+import { FormUtils } from '../../../../utils/form-util';
 @Component({
   selector: 'person-form',
   imports: [ReactiveFormsModule, SelectModule],
@@ -30,7 +31,7 @@ export class GeneratedPerson implements OnChanges, OnInit {
     lastName: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     phone: [null, [Validators.required,]],
-    document: ['', [Validators.required, Validators.minLength(5)]],
+    document: ['', [Validators.required, Validators.minLength(5)], [FormUtils.asyncUniqueValidator(this.personService, 'validateDocument', 'documentTaken')]],
     documentType: ['', [Validators.required]],
     birthDate: [null, [Validators.required]],
     status: ['', [Validators.required]],

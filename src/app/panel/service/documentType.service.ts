@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environments.prod';
 import { Observable } from 'rxjs';
-import {  DocumentTypeContent, DocumentTypeinterface } from '../interfaces/documentType.interface';
+import { DocumentTypeContent, DocumentTypeinterface } from '../interfaces/documentType.interface';
+import { ValidatorInterface } from '../interfaces/asyncValidator.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +14,27 @@ export class DocumentTypeService {
   private baseULR: string = environment.baseURL;
 
   /* Metodo para obtener todos los tipos de documentos*/
-  getDocumentType(): Observable<DocumentTypeinterface>{
+  getDocumentType(): Observable<DocumentTypeinterface> {
 
     return this.http.get<DocumentTypeinterface>(`${this.baseULR}/users/document-type`);
   }
 
-    /* Metodo para crear un tipo de documento*/
-  createDocumentType( documentType:  DocumentTypeContent): Observable<DocumentTypeinterface>{
+  /* Metodo para crear un tipo de documento*/
+  createDocumentType(documentType: DocumentTypeContent): Observable<DocumentTypeinterface> {
 
     return this.http.post<DocumentTypeinterface>(`${this.baseULR}/users/document-type`, documentType)
   }
 
   /* Metodo para actualizar un tipo de documento*/
-  updateDocumentType( documentType:  DocumentTypeContent, id: string): Observable<DocumentTypeinterface>{
+  updateDocumentType(documentType: DocumentTypeContent, id: string): Observable<DocumentTypeinterface> {
 
     return this.http.put<DocumentTypeinterface>(`${this.baseULR}/users/document-type/${id}`, documentType)
+  }
+
+  /* Metodo para validar un tipo de documento*/
+  validateName(name: string): Observable<ValidatorInterface> {
+    return this.http.get<ValidatorInterface>(
+      `${this.baseULR}/users/document-type/validate-name`, { params: { name } }
+    );
   }
 }
