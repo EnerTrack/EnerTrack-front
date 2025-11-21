@@ -1,61 +1,119 @@
-<div class="flex flex-col justify-center items-center h-screen
-            bg-[url('/images/login.webp')] bg-cover bg-center bg-no-repeat">
-
+<div
+  class="flex flex-col justify-center items-center h-screen bg-[url('/images/login.webp')] bg-cover bg-center bg-no-repeat"
+>
   <!-- Logo -->
   <a class="mb-2 flex justify-center items-center">
     <img src="/icon/isotipo-verde.svg" class="w-24" alt="Enertrack Logo" />
   </a>
 
-  <!-- Formulario -->
-  <div class="w-96 p-6 shadow-lg backdrop-blur-xl bg-white/15 rounded-xl">
-    <h1 class="text-4xl text-center font-medium text-white mb-6">Iniciar sesión</h1>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="w-96 p-6 shadow-lg backdrop-blur-xl bg-white/15 rounded-xl">
+      <h1 class="text-4xl text-center font-medium text-white mb-6">Iniciar sesión</h1>
 
-    <!-- Inputs -->
-    <div class="space-y-4 text-white">
+      <!-- Inputs -->
+      <div class="space-y-4 text-white">
+        <!-- Email -->
+        <div class="flex flex-col">
+          <div class="flex items-center bg-white/5 backdrop-blur-xl rounded-lg p-2">
+            <svg
+              class="pr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M4 21v-1c0 -3.31 2.69 -6 6 -6h4c3.31 0 6 2.69 6 6v1"></path>
+                <path
+                  d="M12 11c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4Z"
+                ></path>
+              </g>
+            </svg>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Correo electrónico"
+              class="w-full bg-transparent text-base placeholder-white outline-none"
+            />
+          </div>
 
-      <!-- Email -->
-      <div class="flex items-center bg-white/5 backdrop-blur-xl rounded-lg p-2">
-        <svg class="pr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <g fill="none" stroke="currentColor" stroke-dasharray="28" stroke-dashoffset="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M4 21v-1c0 -3.31 2.69 -6 6 -6h4c3.31 0 6 2.69 6 6v1">
-              <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="28;0"/>
-            </path>
-            <path d="M12 11c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4Z">
-              <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.4s" values="28;0"/>
-            </path>
-          </g>
-        </svg>
-        <input type="email" placeholder="Correo electrónico" class="w-full bg-transparent text-base placeholder-white outline-none" />
+          @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <span class="text-red-500 text-xs mt-1 block">
+            @if (loginForm.get('email')?.errors?.['required']) { El correo es obligatorio } @else if
+            (loginForm.get('email')?.errors?.['email']) { Ingrese un correo válido }
+          </span>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col">
+          <div class="flex items-center bg-white/5 backdrop-blur-xl rounded-lg p-2">
+            <svg
+              class="pr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M6 22q-.825 0-1.412-.587T4 20V10q0-.825.588-1.412T6 8h1V6q0-2.075 1.463-3.537T12 1t3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.587 1.413T18 22zm6-5q.825 0 1.413-.587T14 15t-.587-1.412T12 13t-1.412.588T10 15t.588 1.413T12 17M9 8h6V6q0-1.25-.875-2.125T12 3t-2.125.875T9 6z"
+              />
+            </svg>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Contraseña"
+              class="w-full bg-transparent text-base placeholder-white outline-none"
+            />
+          </div>
+
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <span class="text-red-500 text-xs mt-1 block">
+            @if (loginForm.get('password')?.errors?.['required']) { La contraseña es obligatoria }
+            @else if (loginForm.get('password')?.errors?.['minlength']) { mínimo 6 caracteres }
+          </span>
+          }
+        </div>
       </div>
 
-      <!-- Password -->
-      <div class="flex items-center bg-white/5 backdrop-blur-xl rounded-lg p-2">
-        <svg class="pr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M6 22q-.825 0-1.412-.587T4 20V10q0-.825.588-1.412T6 8h1V6q0-2.075 1.463-3.537T12 1t3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.587 1.413T18 22zm6-5q.825 0 1.413-.587T14 15t-.587-1.412T12 13t-1.412.588T10 15t.588 1.413T12 17M9 8h6V6q0-1.25-.875-2.125T12 3t-2.125.875T9 6z"/>
-        </svg>
-        <input type="password" placeholder="Contraseña" class="w-full bg-transparent text-base placeholder-white outline-none" />
+      <!-- Checkbox & Links -->
+      <div class="mt-4 flex justify-between items-center text-sm text-white">
+        <label class="flex items-center cursor-pointer">
+          <input
+            id="remember"
+            type="checkbox"
+            class="w-4 h-4 rounded-sm border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 mr-2"
+          />
+          Recordarme
+        </label>
+        <a href="#" class="text-gray-900 font-semibold hover:scale-105 transition"
+          >Olvidé mi contraseña</a
+        >
       </div>
 
+      <button
+        type="submit"
+        class="mt-4 w-full py-2 bg-gray-900 text-white rounded-lg shadow-lg font-medium hover:scale-105 transition duration-500"
+      >
+        Iniciar sesión
+      </button>
+
+      <!-- Registrarse -->
+      <div class="mt-4 flex justify-center items-center text-sm text-white gap-2">
+        <span>¿No tienes una cuenta?</span>
+        <a
+          routerLink="/auth/register"
+          class="text-gray-900 font-semibold hover:scale-105 transition"
+          >Crea una aquí</a
+        >
+      </div>
     </div>
-
-    <div class="mt-4 flex justify-between items-center text-sm text-white">
-      <label class="flex items-center cursor-pointer">
-        <input id="remember" type="checkbox" class="w-4 h-4 rounded-sm border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-400 mr-2" />
-        Recordarme
-      </label>
-      <a href="#" class="text-gray-900 font-semibold hover:scale-105 transition">Olvidé mi contraseña</a>
-    </div>
-
-
-    <button class="mt-4 w-full py-2 bg-gray-900 text-white rounded-lg shadow-lg font-medium hover:scale-105 transition duration-500">
-      Iniciar sesión
-    </button>
-
-    <!-- Registrarse / contacto -->
-    <div class="mt-4 flex justify-center items-center text-sm text-white gap-2">
-      <span>¿No tienes una cuenta?</span>
-      <a href="#" class="text-gray-900 font-semibold hover:scale-105 transition">Contáctanos</a>
-    </div>
-
-  </div>
+  </form>
 </div>
